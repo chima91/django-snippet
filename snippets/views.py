@@ -1,7 +1,8 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 def top(request):
-  return HttpResponse(b"Hello, World!!!!")
+  return render(request, "snippets/top.html")
 
 
 def snippet_new(request):
