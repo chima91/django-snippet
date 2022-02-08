@@ -43,5 +43,4 @@ def snippet_edit(request, snippet_id):
 
 def snippet_detail(request, snippet_id):
   snippet = get_object_or_404(Snippet, pk=snippet_id)
-  context = {'snippet': snippet}
-  return render(request, 'snippets/snippet_detail.html', context)
+  return render(request, 'snippets/snippet_detail.html', {'snippet': snippet})
