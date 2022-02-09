@@ -1,0 +1,9 @@
+asgiref==3.5.0
+beautifulsoup4==4.10.0
+Django==3.2
+django-bootstrap5==1.0.0
+django-pygments-renderer==0.0.1
+Pygments==2.8.1
+pytz==2021.3
+soupsieve==2.3.1
+sqlparse==0.4.2
