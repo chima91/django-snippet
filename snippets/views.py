@@ -3,8 +3,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
-from snippets.models import Snippet
-from snippets.forms import CommentForm, SnippetForm
+from snippets.models import Snippet, Comment
+from snippets.forms import SnippetForm, CommentForm
 
 
 def top(request):
@@ -44,9 +44,16 @@ def snippet_edit(request, snippet_id):
   return render(request, "snippets/snippet_edit.html", context)
 
 
+@login_required
 def snippet_detail(request, snippet_id):
   snippet = get_object_or_404(Snippet, pk=snippet_id)
-  return render(request, 'snippets/snippet_detail.html', {'snippet': snippet})
+  comments = Comment.objects.filter(commented_to=snippet_id).all()
+  comment_form = CommentForm()
+  return render(request, 'snippets/snippet_detail.html', {
+    'snippet': snippet,
+    'comments': comments,
+    'comment_form': comment_form,
+  })
 
 
 @login_required
