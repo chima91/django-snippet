@@ -21,7 +21,9 @@ def snippet_new(request):
       snippet = form.save(commit=False)
       snippet.created_by = request.user
       snippet.save()
+      messages.add_message(request, messages.SUCCESS, "スニペットを投稿しました。")
       return redirect(snippet_detail, snippet_id=snippet.pk)
+    messages.add_message(request, messages.ERROR, "スニペットの投稿に失敗しました...")
   else:
     form = SnippetForm()
   context = {'form': form}
@@ -37,7 +39,9 @@ def snippet_edit(request, snippet_id):
     form = SnippetForm(request.POST, instance=snippet)
     if form.is_valid():
       form.save()
+      messages.add_message(request, messages.SUCCESS, "スニペットを編集しました。")
       return redirect('snippet_detail', snippet_id=snippet.id)
+    messages.add_message(request, messages.ERROR, "スニペットの編集に失敗しました...")
   else:
     form = SnippetForm(instance=snippet)
   context = {'form': form}

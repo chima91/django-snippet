@@ -24,7 +24,14 @@
       </div>
     </nav>
     <main>
-      <div class="container">{% block main %}{% endblock %}</div>
+      <div class="container">
+        {% for message in messages %}
+          <div {% if message.tags %}class="{{ message.tags }}" {% endif %}>
+            {{ message }}
+          </div>
+        {% endfor %}
+        <div class="container">{% block main %}{% endblock %}</div>
+      </div>
     </main>
   </body>
 </html>
